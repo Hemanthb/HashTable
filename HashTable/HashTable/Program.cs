@@ -14,6 +14,7 @@ Console.WriteLine("Frequency of word \'or\' is  : " + hash.GetFrequencyOfWords("
 Console.WriteLine("Frequency of word \'not\' is : " + hash.GetFrequencyOfWords("not"));
 
 /*  ----------------------- USE CASE -2 --------------------------  */
+/*          Counts frequency of words in a large phrase             */
 
 string phrase = "Paranoids are not paranoid because they are paranoid but because they" +
     " keep putting themselves deliberately into paranoid avoidable situations";
@@ -35,6 +36,12 @@ for(int i = 0; i < words.Length; i++)
         myMapNode.Add(words[i],frequencyCount);
     }
 }
+Display(myMapNode);
+
+/*  ----------------------- USE CASE -3 --------------------------  */
+/*  Removes the Key value pair node with key-avoidable              */
+
+myMapNode.Remove("avoidable");
 Display(myMapNode);
 
 // To display a table of Words and frequency
