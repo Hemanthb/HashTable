@@ -1,4 +1,6 @@
-﻿HashTable.MyMapNode<string, string> hash = new HashTable.MyMapNode<string, string>(6);
+﻿
+/*  ----------------------- USE CASE -1 --------------------------  */
+HashTable.MyMapNode<string, string> hash = new HashTable.MyMapNode<string, string>(6);
 hash.Add("0", "to");
 hash.Add("1", "be");
 hash.Add("2", "or");
@@ -10,4 +12,39 @@ Console.WriteLine("Frequency of word \'to\' is  : " + hash.GetFrequencyOfWords("
 Console.WriteLine("Frequency of word \'be\' is  : " + hash.GetFrequencyOfWords("be"));
 Console.WriteLine("Frequency of word \'or\' is  : " + hash.GetFrequencyOfWords("or"));
 Console.WriteLine("Frequency of word \'not\' is : " + hash.GetFrequencyOfWords("not"));
+
+/*  ----------------------- USE CASE -2 --------------------------  */
+
+string phrase = "Paranoids are not paranoid because they are paranoid but because they" +
+    " keep putting themselves deliberately into paranoid avoidable situations";
+
+string[] words = phrase.ToLower().Split(" ");
+int frequencyCount = 0;
+string[] uniqueWords = words.Distinct().ToArray();
+HashTable.MyMapNode<string,int> myMapNode = new HashTable.MyMapNode<string,int>(uniqueWords.Length);
+for(int i = 0; i < words.Length; i++)
+{
+    if (!myMapNode.CheckKey(words[i]))
+    {
+        myMapNode.Add(words[i], 1);
+    }
+    else
+    {
+        frequencyCount = myMapNode.FindValue(words[i]) + 1;
+        myMapNode.Remove(words[i]);
+        myMapNode.Add(words[i],frequencyCount);
+    }
+}
+Display(myMapNode);
+
+// To display a table of Words and frequency
+void Display(HashTable.MyMapNode<String,int> obj) {
+    Console.WriteLine("-----------------------------------");
+    Console.WriteLine($"{"Frequency",-20} || {"Count",10}");
+    Console.WriteLine("-----------------------------------");
+    foreach (string key in uniqueWords)
+    {
+        Console.WriteLine($"{key,-20} || {obj.FindValue(key),10}");
+    }
+}
 

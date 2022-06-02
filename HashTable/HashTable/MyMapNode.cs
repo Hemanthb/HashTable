@@ -64,7 +64,51 @@ namespace HashTable
             }
             return count;
         }
+
+        public Boolean CheckKey(K key)
+        {
+            int position = GetArrayPosition(key);
+            LinkedList<KeyValue<K,V>> keyValues = hashMap[position];
+            if (keyValues != null)
+            {
+                foreach (KeyValue<K, V> item in keyValues)
+                {
+                    if (item.Key.Equals(key))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
         
+        public void Remove(K key)
+        {
+            int position = GetArrayPosition(key);
+            LinkedList<KeyValue<K, V>> keyValues = hashMap[position];
+            foreach (KeyValue<K, V> item in keyValues)
+            {
+                if (item.Key.Equals(key))
+                {
+                    keyValues.Remove(item);
+                    return;
+                }
+            }
+        }
+
+        public V FindValue(K key)
+        {
+            int position = GetArrayPosition(key);
+            LinkedList<KeyValue<K, V>> keyValues = hashMap[position];
+            foreach (KeyValue<K, V> item in keyValues)
+            {
+                if (item.Key.Equals(key))
+                {
+                    return item.Value;
+                }
+            }
+            return default(V);
+        }
         
         public struct KeyValue<K, V>
         {
